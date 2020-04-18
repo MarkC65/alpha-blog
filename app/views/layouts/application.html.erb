@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>AlphaBlog</title>
+    <title>Mark's Blog</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -10,6 +10,16 @@
   </head>
 
   <body>
+    <% flash.each do |m| %>
+      <% if m[0] == "top" %>
+        <%= m[1] %>
+      <% end %>
+    <% end %>
     <%= yield %>
+    <% flash.each do |m| %>
+      <% if m[0] == "bottom" %>
+        <%= m[1] %>
+      <% end %>
+    <% end %>
   </body>
 </html>
