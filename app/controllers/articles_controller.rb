@@ -19,7 +19,7 @@ class ArticlesController < ApplicationController
   def create
     @article = Article.create(params.require(:article).permit(:title, :description))
     if @article.id
-      flash[:top] = "Article created."
+      flash[:top] = "Article created successfully."
       redirect_to article_path(@article)
     else
       render 'new'

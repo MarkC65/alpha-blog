@@ -19,6 +19,7 @@
     <%= f.text_area :description, size: "65x10" %>
   </p>
   <p>
-    <%= f.submit "Create Article" %>
+    <%= f.submit "Create Article" %> |
+    <%= link_to 'Cancel and return to Index', articles_path %>
   </p>
 <% end %>
