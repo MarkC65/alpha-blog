@@ -1,0 +1,23 @@
+<% if @article.errors.any? %> 
+  <h2>The following errors prevented the article from being saved:</h2> 
+  <ul> 
+    <% @article.errors.full_messages.each do |msg| %> 
+      <li><%= msg %></li> 
+    <% end %> 
+  </ul>
+<% end %>
+
+<%= form_with(model: @article, local: true) do | f | %>
+  <p>
+    <%= f.label :title %>
+    <%= f.text_field :title, size: "67" %>
+  </p>
+  <p>
+    <%= f.label :description %>
+    <%= f.text_area :description, size: "65x10" %>
+  </p>
+  <p>
+    <%= f.submit "Save Article" %> |
+    <%= link_to 'Cancel and return to Index', articles_path %>
+  </p>
+<% end %>

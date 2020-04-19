@@ -10,11 +10,7 @@
   </head>
 
   <body>
-    <% flash.each do |m| %>
-      <% if m[0] == "top" %>
-        <%= m[1] %>
-      <% end %>
-    <% end %>
+  <%= render 'layouts/messages' %>
     <%= yield %>
     <% flash.each do |m| %>
       <% if m[0] == "bottom" %>
