@@ -1,0 +1,48 @@
+@import 'bootstrap/dist/css/bootstrap';
+
+.navbar {
+  background-color: black !important;
+}
+
+.nav-link {
+  color: white !important;
+}
+
+.jumbotron {
+  background-image: url('ian-schneider-TamMbr4okv4-unsplash.jpg');
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 425px;
+}
+
+.btn-primary {
+  background-color: limegreen;
+}
+
+#logo {
+  float: left;
+  font-size: 1.7em;
+  color: #fff;
+  text-transform: capitalize;
+  letter-spacing: normal;
+  font-weight: normal;
+}
+
+#home-container {
+  margin-top: 30px;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+#page-content {
+  flex: 1 0 auto;
+  background-color: rgba(211, 211, 211, .3);
+}
+
+#sticky-footer {
+  flex-shrink: none;
+}
