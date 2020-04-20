@@ -1,0 +1,10 @@
+#!/bin/bash
+echo bundle install --without production
+#bundle install --without production
+echo git add -A
+#git add -A
+echo git commit -m $1
+#git commit -m $1
+#git push origin master
+#git push aws master
+#git push heroku master

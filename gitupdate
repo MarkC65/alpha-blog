@@ -1,7 +1,18 @@
 #!/bin/bash
+echo "bundle install --without production"
 bundle install --without production
+
+echo "git add -A"
 git add -A
-git commit -m %1
+
+echo "git commit -m \"$1\""
+git commit -m \"$1\"
+
+echo "git push origin master"
 git push origin master
+
+echo "git push aws master"
 git push aws master
+
+echo "git push heroku master"
 git push heroku master
