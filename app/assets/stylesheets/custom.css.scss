@@ -43,6 +43,15 @@ body {
   background-color: rgba(211, 211, 211, .3);
 }
 
+#new-container {
+  background-color: rgba(255, 255, 230, 1)
+}
+
+#alert-container {
+  padding-bottom: 0px;
+  background-color: rgba(255, 64, 0, 1);
+}
+
 #sticky-footer {
   flex-shrink: none;
 }
@@ -59,4 +68,8 @@ body {
 
 #form-label {
   font-size: 22px;
+}
+
+.alert-text {
+  font-size: 2rem;
 }
