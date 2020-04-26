@@ -1,6 +1,6 @@
 <div class="alert" id="alert-text">
   <ul> 
-    <% @article.errors.full_messages.each do |msg| %> 
+    <% obj.errors.full_messages.each do |msg| %> 
       <li> <%= msg %> </li> 
     <% end %> 
   </ul>
