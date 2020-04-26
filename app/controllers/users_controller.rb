@@ -4,6 +4,7 @@ class UsersController < ApplicationController
   end
 
   def index
+    @users = User.all
   end
   
   def new
@@ -16,7 +17,7 @@ class UsersController < ApplicationController
   def create
     @user = User.create(params_require)
     if @user.id
-      flash[:top] = "User created successfully."
+      flash[:top] = "Welcome #{ @user.display_name }, you have successfully signed up."
       redirect_to articles_path
     else
       render 'new'
@@ -27,6 +28,9 @@ class UsersController < ApplicationController
   end
 
   def destroy
+    @user = User.find(params[:id])
+    @user.destroy
+    redirect_to users_path
   end
 
 private
