@@ -1,7 +1,6 @@
 class User < ApplicationRecord
   before_save { 
     self.email = self.email.downcase 
-    self.display_name = self.display_name.titleize 
   }
   has_many :articles
   validates :username, presence: true, length: { in: 3..25 }, uniqueness: { case_sensitive: false }

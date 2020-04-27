@@ -12,6 +12,7 @@ class UsersController < ApplicationController
   end
 
   def edit
+    @user = User.find(params[:id])
   end
 
   def create
@@ -25,6 +26,13 @@ class UsersController < ApplicationController
   end
 
   def update
+    @user = User.find(params[:id])
+    if @user.update(params_require)
+      flash[:top] = "Profile updated successfully."
+      redirect_to users_path
+    else
+      render 'edit'
+    end
   end
 
   def destroy
