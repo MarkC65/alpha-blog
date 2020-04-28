@@ -6,6 +6,7 @@
         <div class="card text-center shadow mb-2 bg-white rounded">
           <div class="card-header font-italic">
             by <%= @article.user.display_name %>
+            <%= link_to avatar_for(@article.user), user_path(@article.user) %>
           </div>
           <div class="card-body">
             <p class="card-text">
