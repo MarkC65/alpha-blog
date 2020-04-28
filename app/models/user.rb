@@ -1,6 +1,9 @@
 class User < ApplicationRecord
+  include Gravtastic
   before_save { 
-    self.email = self.email.downcase 
+    self.username = self.username.downcase.strip
+    self.email = self.email.downcase.strip
+    self.display_name = self.display_name.strip
   }
   has_many :articles
   validates :username, presence: true, length: { in: 3..25 }, uniqueness: { case_sensitive: false }
@@ -9,4 +12,5 @@ class User < ApplicationRecord
   validates :email, presence: true, length: { maximum: 105 }, uniqueness: { case_sensitive: false }, 
     format: { with: VALID_EMAIL_REGEX, message: "not a valid email address" }
   has_secure_password
-  end
+  gravtastic :size => 120
+end

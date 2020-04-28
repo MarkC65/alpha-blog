@@ -1,6 +1,8 @@
 class UsersController < ApplicationController
 
   def show
+    @user = User.find(params[:id])
+    @articles = @user.articles
   end
 
   def index
@@ -27,9 +29,9 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-    if @user.update(params_require)
-      flash[:top] = "Profile updated successfully."
-      redirect_to users_path
+    if @user.update(params_require2)
+      flash[:top] = "#{ @user.display_name } profile successfully updated"
+      redirect_to user_path
     else
       render 'edit'
     end
@@ -44,5 +46,9 @@ class UsersController < ApplicationController
 private
   def params_require
     params.require(:user).permit(:username, :display_name, :email, :password)
+  end
+
+  def params_require2
+    params.require(:user).permit(:display_name, :email, :password)
   end
 end
