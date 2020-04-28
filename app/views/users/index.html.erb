@@ -1,10 +1,16 @@
 <div id="page-content">
-  <h1 class="text-center mt-4 mb-4">Mark's Bloggers</h1>
+  <h1 class="text-center mt-4 mb-1">Mark's Bloggers</h1>
   <div class="container"> 
+    <div class="flickr_pagination">
+      <div class="page_info">
+        <%= page_entries_info @users %>
+      </div>
+      <%= will_paginate @users, :container => false %>
+    </div>
     <% @users.each do | user | %>
       <div class="row justify-content-md-center">
         <div class="col-8">
-          <div class="card text-center shadow mb-2 bg-white rounded">
+          <div class="card text-center shadow mt-4 mb-1 bg-white rounded">
             <div class="card-header font-italic">
               <%= link_to user.display_name, user_path(user) %>
             </div>
@@ -27,11 +33,12 @@
           </div>
         </div>
       </div>
-      <p>
-        <br>
-        <br>
-        <br>
-      </p>
     <% end %>
+    <div class="flickr_pagination">
+      <div class="page_info mt-2">
+        <%= page_entries_info @users %>
+      </div>
+      <%= will_paginate @users, :container => false %>
+    </div>
   </div>
 </div>

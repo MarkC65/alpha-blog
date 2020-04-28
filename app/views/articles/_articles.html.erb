@@ -1,35 +1,44 @@
 <div class="container"> 
-<% @articles.each do | article | %>
-  <div class="row justify-content-md-center">
-    <div class="col-8">
-      <div class="card text-center shadow mb-2 bg-white rounded">
-        <div class="card-header font-italic">
-          by <%= link_to article.user.display_name, user_path(article.user) %>
-        </div>
-        <div class="card-body">
-          <h5 class="card-title"><%= link_to article.title, article_path(article), class: "text-success" %></h5>
-          <p class="card-text">
-            <%= truncate(article.description, length: 120) %>
-          </p>
-          <tbody>
-            <tr>
-              <td><%= link_to "Show", article_path(article), class: "btn btn-success special-card text-white" %></td>
-              <td><%= link_to "Edit", edit_article_path(article), class: "btn btn-success special-card text-white" %></td>
-              <td><%= link_to "Delete", article_path(article), method: :delete, data: { confirm: "Are you sure?"}, class: "btn btn-danger special-card text-white" %></td>
-            </tr>
-          </tbody>
-          
-        </div>
-        <div class="card-footer text-muted">
-          Created: <%= time_ago_in_words(article.created_at) %> ago; Last Edited: <%= time_ago_in_words(article.updated_at) %> ago
+  <div class="flickr_pagination">
+    <div class="page_info">
+      <%= page_entries_info @articles %>
+    </div>
+    <%= will_paginate @articles, :container => false %>
+  </div>
+  <% @articles.each do | article | %>
+    <div class="row justify-content-md-center">
+      <div class="col-8">
+        <div class="card text-center shadow mt-4 mb-0 bg-white rounded">
+          <div class="card-header font-italic">
+            by <%= link_to article.user.display_name, user_path(article.user) %>
+          </div>
+          <div class="card-body">
+            <h5 class="card-title"><%= link_to article.title, article_path(article), class: "text-success" %></h5>
+            <p class="card-text">
+              <%= truncate(article.description, length: 120) %>
+            </p>
+            <tbody>
+              <tr>
+                <td><%= link_to "Show", article_path(article), class: "btn btn-success special-card text-white" %></td>
+                <td><%= link_to "Edit", edit_article_path(article), class: "btn btn-success special-card text-white" %></td>
+                <td><%= link_to "Delete", article_path(article), method: :delete, data: { confirm: "Are you sure?"}, class: "btn btn-danger special-card text-white" %></td>
+              </tr>
+            </tbody>
+            
+          </div>
+          <div class="card-footer text-muted">
+            Created: <%= time_ago_in_words(article.created_at) %> ago; Last Edited: <%= time_ago_in_words(article.updated_at) %> ago
+          </div>
         </div>
       </div>
     </div>
-  </div>
+  <% end %>
   <p>
-    <br>
-    <br>
-    <br>
   </p>
-<% end %>
+  <div class="flickr_pagination mb-5">
+    <div class="page_info">
+      <%= page_entries_info @articles %>
+    </div>
+    <%= will_paginate @articles, :container => false %>
+  </div>
 </div>
