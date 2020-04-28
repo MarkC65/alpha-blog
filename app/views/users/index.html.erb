@@ -1,9 +1,37 @@
-
-<table>
-  <% @users.each do | u | %>
-    <tr>
-      <td> <%= u.username %> </td>
-      <td><%= link_to "Show Articles", user_path(u), class: "btn btn-danger special-card text-white" %></td>
-    </tr>
-  <% end %>
-</table>
+<div id="page-content">
+  <h1 class="text-center mt-4 mb-4">Mark's Bloggers</h1>
+  <div class="container"> 
+    <% @users.each do | user | %>
+      <div class="row justify-content-md-center">
+        <div class="col-8">
+          <div class="card text-center shadow mb-2 bg-white rounded">
+            <div class="card-header font-italic">
+              <%= link_to user.display_name, user_path(user) %>
+            </div>
+            <div class="card-body">
+              <%= link_to avatar_for(user), user_path(user), class: "text-success" %>
+              <p class="card-text">
+                <br>
+                <%= pluralize(user.articles.count, "article") %>
+              </p>
+              <tbody>
+                <tr>
+                  <td><%= link_to "Show Profile", user_path(user), class: "btn btn-success special-card text-white" %></td>
+                  <td><%= link_to "Edit Profile", edit_user_path(user), class: "btn btn-success special-card text-white" %></td>
+                </tr>
+              </tbody>
+            </div>
+            <div class="card-footer text-muted">
+              Joined: <%= time_ago_in_words(user.created_at) %> ago
+            </div>
+          </div>
+        </div>
+      </div>
+      <p>
+        <br>
+        <br>
+        <br>
+      </p>
+    <% end %>
+  </div>
+</div>
