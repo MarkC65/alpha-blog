@@ -57,7 +57,7 @@ private
   end
 
   def require_same_user
-    if current_user != @user
+    if (current_user != @user) && (!current_user.admin?)
       flash[:top] = "You are not permitted to perform that action!"
       redirect_to user_path(@user)
     end

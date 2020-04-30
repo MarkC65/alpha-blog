@@ -23,8 +23,9 @@
               <tbody>
                 <tr>
                   <td><%= link_to "Show Profile", user_path(user), class: "btn btn-success special-card text-white" %></td>
-                  <% if logged_in? && user == current_user %>
+                  <% if logged_in? && (user == current_user || current_user.admin?) %>
                     <td><%= link_to "Edit Profile", edit_user_path(user), class: "btn btn-success special-card text-white" %></td>
+                    <td><%= link_to "Delete Profile", user_path(user), method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-success special-card text-white" %></td>
                   <% end %>
                 </tr>
               </tbody>
