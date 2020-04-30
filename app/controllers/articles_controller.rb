@@ -1,5 +1,7 @@
 class ArticlesController < ApplicationController
   before_action :set_article, only: [:show, :edit, :update, :destroy]
+  before_action :require_login, except: [:show, :index]
+  before_action :require_same_user, except: [:show, :index, :new, :create]
 
   def show
   end
@@ -16,9 +18,9 @@ class ArticlesController < ApplicationController
   end
 
   def create
-    @article = Article.create(params_require)
-    @article.user = User.first
-    if @article.id
+    @article = Article.new(params_require)
+    @article.user = current_user
+    if @article.save
       flash[:top] = "Article created successfully."
       redirect_to article_path(@article)
     else
@@ -27,8 +29,7 @@ class ArticlesController < ApplicationController
   end
 
   def update
-    @article.update(params_require)
-    if @article.id
+    if @article.update(params_require)
       flash[:top] = "Article updated successfully."
       redirect_to article_path(@article)
     else
@@ -48,6 +49,13 @@ class ArticlesController < ApplicationController
 
   def params_require
     params.require(:article).permit(:title, :description)
+  end
+
+  def require_same_user
+    if current_user != @article.user
+      flash[:top] = "You are not permitted to perform that action!"
+      redirect_to article_path(@article)
+    end
   end
 
 end

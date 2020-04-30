@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :require_login, except: [:index, :new, :create, :show] 
+  before_action :require_same_user, except: [:index, :new, :create, :show]
 
   def show
     @articles = @user.articles.paginate(page: params[:page], per_page: 10)
@@ -15,25 +17,24 @@ class UsersController < ApplicationController
 
   def edit
   end
-
-  def create
-    @user = User.create(params_require)
-    if @user.id
-      flash[:top] = "Welcome #{ @user.display_name }, you have successfully signed up."
-      @current_user = @user
-      session[:user_id] = @user.id
-      redirect_to articles_path
-    else
-      render 'new'
-    end
-  end
-
+  
   def update
     if @user.update(params_require2)
       flash[:top] = "#{ @user.display_name } profile successfully updated"
       redirect_to user_path
     else
       render 'edit'
+    end
+  end
+
+  def create
+    @user = User.new(params_require)
+    if @user.save
+      flash[:top] = "Welcome #{ @user.display_name }, you have successfully signed up."
+      session[:user_id] = @user.id
+      redirect_to articles_path
+    else
+      render 'new'
     end
   end
 
@@ -53,5 +54,12 @@ private
 
   def set_user
     @user = User.find(params[:id])
+  end
+
+  def require_same_user
+    if current_user != @user
+      flash[:top] = "You are not permitted to perform that action!"
+      redirect_to user_path(@user)
+    end
   end
 end
