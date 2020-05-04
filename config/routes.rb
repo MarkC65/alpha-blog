@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
   root 'pages#home'
-  get '/index', to: 'pages#home'
   get 'about', to: 'pages#about'
   resources :articles
   get 'signup', to: 'users#new'
@@ -8,5 +7,6 @@ Rails.application.routes.draw do
   get 'login', to: 'sessions#new'
   post 'login', to: 'sessions#create'
   delete 'logout', to:'sessions#destroy'
-  resources :categories, except: [:destroy]
+  get 'logout', to:'sessions#destroy'
+  resources :categories, except: [:edit, :update, :destroy]
 end

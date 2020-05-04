@@ -1,7 +1,0 @@
-one:
-  username: mark
-  email: mark.chalinder@gmail.com
-  display_name: Mark
-  password_digest: dummy
-  admin: false
-
