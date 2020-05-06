@@ -20,4 +20,4 @@ require("channels")
 //= require jquery_ujs 
 //= require rails-ujs
 
-import "bootstrap" 
+import 'bootstrap' 
