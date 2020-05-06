@@ -2,7 +2,9 @@ class CategoriesController < ApplicationController
   before_action :require_admin, except: [:index, :show]
 
   def index
-    @categories = Category.paginate(page: params[:page], per_page: 10)
+    #Client.order(orders_count: :asc,
+    @categories = Category.order(name: :asc).paginate(page: params[:page], per_page: 10)
+    #@categories = Category.paginate(page: params[:page], per_page: 10)
   end
 
   def new
@@ -20,6 +22,28 @@ class CategoriesController < ApplicationController
   end
   
   def show
+    @category = Category.find(params[:id])
+    @articles = @category.articles.paginate(page: params[:page], per_page: 10)
+  end
+
+  def edit
+    @category = Category.find(params[:id])
+  end
+
+  def update
+    @category = Category.find(params[:id])
+    if @category.update(params_require)
+      flash[:top] = "Category name updated successfully."
+      redirect_to categories_path
+    else
+      render 'edit'
+    end
+  end
+
+  def destroy
+    @category = Category.find(params[:id])
+    @category.destroy
+    redirect_to categories_path
   end
 
   private

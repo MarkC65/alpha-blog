@@ -8,5 +8,5 @@ Rails.application.routes.draw do
   post 'login', to: 'sessions#create'
   delete 'logout', to:'sessions#destroy'
   get 'logout', to:'sessions#destroy'
-  resources :categories, except: [:edit, :update, :destroy]
+  resources :categories
 end
